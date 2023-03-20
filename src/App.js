@@ -7,10 +7,12 @@ import Nav from './components/Nav';
 function App() {
   return (
     <>
+    <div className='grid-container'>
     <Header />
     <Nav />
     <Main />
     <Footer />
+    </div>
     
     </>
   );
