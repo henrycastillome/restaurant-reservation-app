@@ -1,8 +1,18 @@
+import logoLittleLemon from "../images/Logo2.svg";
+
+
+const logo=[
+    {
+        alt:'logo little lemmon',
+        src: logoLittleLemon,
+        id:'logoLittle'
+    },
+];
 const Footer=()=>{
     return (
     <footer>
         <div className="stack-horizontal">
-            <img src="https://picsum.photos/200/300?grayscale" alt='placeholder' />
+          
             <div className="stack-vertical">
                 <h6> Navigation</h6>
                 
@@ -34,6 +44,7 @@ const Footer=()=>{
                 
             </div>
         </div>
+        
     </footer>
     )
 }

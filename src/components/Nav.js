@@ -1,14 +1,31 @@
+import React from "react";
+import logoLittleLemon from "../images/Logo.svg";
+
+
+const logo=[
+    {
+        alt:'logo little lemmon',
+        src: logoLittleLemon,
+        id:'logoLittle'
+    },
+];
+
+
 const Nav=()=>{
     return(
     <nav className='nav-bar'>
-        <img src="https://img.logoipsum.com/275.svg"></img>
+        {logo.map((logos)=>(
+            <img src={logos.src} alt={logos.alt} key={logos.id} />
+
+        ))}
+        
         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Menu</a></li>
-            <li><a href="#">Reservations</a></li>
-            <li><a href="#">Order Online</a></li>
-            <li><a href="#">Login</a></li>
+            <li>Home</li>
+            <li>About</li>
+            <li>Menu</li>
+            <li>Reservations</li>
+            <li>Order Online</li>
+            <li>Login</li>
         </ul>
     </nav>
         )
