@@ -46,7 +46,7 @@ const InputWrapperDate = styled.div`
 
 const InputFieldDate = ({ value, onChange, isinvalid, onBlur }) => {
   return (
-    <InputWrapperDate isnvalid={isinvalid}>
+    <InputWrapperDate isinvalid={isinvalid}>
       <label>
         Date <sup>*</sup>
       </label>

@@ -54,6 +54,7 @@ const Reservations = () => {
     isTouched: false,
   });
   const [isInvalidEmail, setIsInvalidEmail] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(false);
 
   const handlePhoneNumberChange = (e) => {
     const input = e.target.value.replace(/\D/g, "");
@@ -90,8 +91,115 @@ const Reservations = () => {
   const maxDate = new Date();
   maxDate.setDate(maxDate.getDate() + 14);
 
+  const minDate= new Date();
+  
+
+  const formValidation=()=>{
+    let isValid = true;
+
+
+
+  if (name.value === "") {
+    setName({ ...name, isTouched: true });
+    isValid = false;
+  }
+  if (lastName.value === "") {
+    setLastName({ ...lastName, isTouched: true });
+    isValid = false;
+  }
+  if (email.value === "") {
+    setEmail({ ...email, isTouched: true });
+    setIsInvalidEmail(true);
+    isValid = false;
+  }
+  if ((telephone.value === "")||(telephone.value.length <= 10 && telephone.isTouched)) {
+    setTelephone({ ...telephone, isTouched: true });
+    isValid = false;
+  }
+  if (date.value === ""  ||
+  (new Date(date.value) > maxDate) ||
+  (new Date(date.value) < minDate)) {
+    setDate({ ...date, isTouched: true });
+    isValid = false;
+  }
+  if (timeOfDay.value === "") {
+    setTimeofDay({ ...timeOfDay, isTouched: true });
+    isValid = false;
+  }
+  if (guest.value === "") {
+    setGuest({ ...guest, isTouched: true });
+    isValid = false;
+  }
+  if (seat.value === "") {
+    setSeat({ ...seat, isTouched: true });
+    isValid = false;
+  }
+  if (ocasion.value === "") {
+    setOcasion({ ...ocasion, isTouched: true });
+    isValid = false;
+  }
+
+  else{
+    
+    return isValid}
+
+  }
+
+  const clearForm=()=>{
+    setName({
+      value: "",
+      isTouched: false,
+    });
+    setLastName({
+      value: "",
+      isTouched: false,
+    });
+    setEmail({
+      value: "",
+      isTouched: false,
+    });
+    setDate({
+      value: "",
+      isTouched: false,
+    });
+    setGuest({
+      value: "",
+      isTouched: false
+    });
+    setTimeofDay({
+      value: "",
+      isTouched: false,
+    });
+    setSeat({
+      value: "",
+      isTouched: false,
+    });
+   setSpecial("");
+    setTelephone({
+      value: "",
+      isTouched: false,
+    });
+    setOcasion({
+      value: "",
+      isTouched: false,
+    });
+    setIsInvalidEmail(false);
+    setIsFormValid(false);
+  }
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    
+    
+    const isValid=formValidation();
+  
+  
+    
+    if(isValid){
+      setIsFormValid(true)
+    
     const formData={
    
       name:name.value,
@@ -109,7 +217,11 @@ const Reservations = () => {
       .join("\n");
 
     alert(`Form submitted with the following values:\n\n${formValues}`);
+    clearForm()
   }
+ 
+  
+}
   ;
 
   return (
@@ -228,7 +340,7 @@ const Reservations = () => {
               onBlur={handlePhoneNumberChange}
               isinvalid={
                 (telephone.isTouched && telephone.value === "") ||
-                (telephone.value.length <= 10 && telephone.isTouched)
+                (telephone.value.length <= 10 && telephone.isTouched) 
               }
             />
             {telephone.isTouched && telephone.value === "" ? (
@@ -254,7 +366,8 @@ const Reservations = () => {
                 onBlur={(e) => setDate({ ...date, isTouched: true })}
                 isinvalid={
                   (date.isTouched && date.value === "") ||
-                  new Date(date.value) > maxDate
+                  (new Date(date.value) > maxDate) ||
+                  (new Date(date.value) < minDate)
                 }
               />
               {date.isTouched && date.value === "" ? (
@@ -263,13 +376,17 @@ const Reservations = () => {
                 <ErrorMessage>
                   The date has to be no more than 2 weeks in advance
                 </ErrorMessage>
-              ) : null}
+              ) : new Date(date.value)< minDate && date.isTouched ?
+              (<ErrorMessage>
+                  The date can't be earlier than today
+                </ErrorMessage>) : null}
             </div>
 
             <div style={{ display: "block", width: "100%" }}>
 
             <InputFieldTime
               value={timeOfDay.value}
+              hasValue={timeOfDay.value} //to add a place holder color gray to the select button in the component (check component)
               onChange={(e) => setTimeofDay({...timeOfDay, value:e.target.value})}
               onBlur={(e) => setTimeofDay({ ...timeOfDay, isTouched: true })}
                 isinvalid={
@@ -294,6 +411,7 @@ const Reservations = () => {
           >
             <InputFieldGuest
               value={guest.value}
+              hasValue={guest.value}
               onChange={(e) => setGuest({...guest, value:e.target.value})}
               onBlur={(e) => setGuest({ ...guest, isTouched: true })}
               isinvalid={
@@ -314,6 +432,7 @@ const Reservations = () => {
           >
             <InputFieldSeat
               value={seat.value}
+              hasValue={seat.value}
               onChange={(e) => setSeat({...seat, value:e.target.value})}
               onBlur={(e) => setSeat({ ...seat, isTouched: true })}
               isinvalid={
@@ -334,6 +453,7 @@ const Reservations = () => {
           >
             <InputFieldOcasion
               value={ocasion.value}
+              hasValue={ocasion.value}
               onChange={(e) => setOcasion({...ocasion, value:e.target.value})}
               onBlur={(e) => setOcasion({ ...ocasion, isTouched: true })}
               isinvalid={
@@ -373,7 +493,8 @@ const Reservations = () => {
               marginTop:"2rem"
             }}
           >
-            <Button type="submit">Submit</Button>
+            <Button type="submit" disabled={isFormValid} >
+              { isFormValid? "Submitting" : "Submit" }</Button>
           </div>
         </form>
       </div>

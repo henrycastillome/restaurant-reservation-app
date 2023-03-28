@@ -24,6 +24,7 @@ padding-top: 0.5rem ;
     border-radius: 4px;
     box-sizing: border-box;
     font-family: var(--body-font);
+    color: ${props => (props.hasValue ? "black" : "gray")};
   }
   select:required:invalid {
     color: gray;
@@ -65,11 +66,11 @@ const time = [
   "09:30 PM",
 ];
 
-const InputFieldTime = ({ onChange, value, isinvalid, onBlur }) => {
+const InputFieldTime = ({ onChange, value, isinvalid, onBlur, hasValue }) => {
   return (
-    <InputWrapperTime isnvalid={isinvalid}>
+    <InputWrapperTime isinvalid={isinvalid} hasValue={hasValue}>
       <label>Time <sup>*</sup></label>
-      <select name="day-time" value={value} onChange={onChange} onBlur={onBlur} required>
+      <select name="day-time" value={value}  onChange={onChange} onBlur={onBlur}>
         <option value="" disabled >
           Select..
         </option>

@@ -24,6 +24,7 @@ const InputWrapperTime = styled.div`
     border-radius: 4px;
     box-sizing: border-box;
     font-family: var(--body-font);
+    color: ${props => (props.hasValue ? "black" : "gray")};
   }
   input:focus,
   select:focus {
@@ -42,11 +43,11 @@ const InputWrapperTime = styled.div`
   }
 `;
 
-const InputFieldSeat = ({ value, onChange, isinvalid, onBlur }) => {
+const InputFieldSeat = ({ value, onChange, isinvalid, onBlur, hasValue }) => {
   return (
-    <InputWrapperTime isnvalid={isinvalid}>
+    <InputWrapperTime isinvalid={isinvalid} hasValue={hasValue}>
       <label>Seating Option<sup>*</sup></label>
-      <select name="seating" value={value} onChange={onChange} onBlur={onBlur} required>
+      <select name="seating" value={value} onChange={onChange} onBlur={onBlur} >
         <option value="" disabled >
           Select..
         </option>

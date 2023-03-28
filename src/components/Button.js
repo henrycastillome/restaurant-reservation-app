@@ -25,14 +25,14 @@ background-color: ${props => props.primary? 'var(--primary-color-yellow)' : 'var
 `
 
 
-const Button=({children, isPrimary, onClick, type})=>{
+const Button=({children, isPrimary, onClick, type, disabled})=>{
     return(
 
     isPrimary ? 
 
-       ( <Buttons primary type={type} onClick={onClick}>{children}</Buttons> ) :
+       ( <Buttons primary type={type} onClick={onClick} disabled={disabled}>{children}</Buttons> ) :
        
-       (<Buttons type={type} onClick={onClick} >{children}</Buttons>)
+       (<Buttons type={type} onClick={onClick} disabled={disabled} >{children}</Buttons>)
         
         
 

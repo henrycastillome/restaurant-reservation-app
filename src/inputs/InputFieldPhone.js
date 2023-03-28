@@ -32,7 +32,7 @@ const InputWrapperDate = styled.div`
 
 const InputFieldPhone = ({ value, onChange, isinvalid, onBlur }) => {
   return (
-    <InputWrapperDate isnvalid={isinvalid}>
+    <InputWrapperDate isinvalid={isinvalid}>
       <label>Phone Number <sup>*</sup></label>
       <input
         type='"tel"'
