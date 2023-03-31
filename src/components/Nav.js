@@ -3,7 +3,7 @@ import logoLittleLemon from "../images/Logo.svg";
 import { useAlertContext } from "../context/alertContext";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Slide } from "react-awesome-reveal";
+
 
 const logo = [
   {
