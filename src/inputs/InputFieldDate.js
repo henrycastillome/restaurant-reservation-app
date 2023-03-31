@@ -52,6 +52,7 @@ const InputFieldDate = ({ value, onChange, isinvalid, onBlur }) => {
       </label>
       <input
         type="text"
+        data-testid="date-component" 
         onFocus={(e) => (e.target.type = "date")}
         value={value}
         onChange={onChange}

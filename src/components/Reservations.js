@@ -14,6 +14,8 @@ import {  Slide } from "react-awesome-reveal";
 
 
 
+
+
 const isEmail = (email) => {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return regex.test(email);
@@ -192,6 +194,7 @@ const Reservations = () => {
 
   const { alertSucess } = useAlertContext();
 
+ 
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -200,9 +203,11 @@ const Reservations = () => {
     if (isValid) {
       setIsFormValid(true);
 
+     
+
       const formData = {
         name: name.value,
-        LastName: lastName.value,
+        lastName: lastName.value,
         email: email.value,
         date: date.value,
         phone: telephone.value,
@@ -241,7 +246,8 @@ const Reservations = () => {
                 <InputField
                   label="First Name"
                   type="text"
-                  htmlFor="text"
+                  htmlFor="firstName"
+                  id='firstName'
                   value={name.value}
                   placeholder="Enter your first name"
                   onChange={(e) => setName({ ...name, value: e.target.value })}
@@ -257,13 +263,15 @@ const Reservations = () => {
                   <ErrorMessage>Too short!</ErrorMessage>
                 ) : null}
               </div>
-            </Slide>
+            </Slide> 
             <Slide duration={2000} cascade triggerOnce>
               <div className="reservation-item">
                 <InputField
+                  
                   label="Last Name"
                   type="text"
-                  htmlFor="text"
+                  htmlFor="lastName"
+                  id='lastName'
                   value={lastName.value}
                   placeholder="Enter your last name"
                   onChange={(e) =>
@@ -287,6 +295,8 @@ const Reservations = () => {
                 <InputField
                   label="Email"
                   type="text"
+                  htmlFor="email"
+                  id='email'
                   value={email.value}
                   placeholder="Enter your email"
                   onChange={handleEmail}
@@ -303,6 +313,7 @@ const Reservations = () => {
             <Slide duration={2000} cascade triggerOnce>
               <div className="reservation-item" >
                 <InputFieldPhone
+                 
                   value={telephone.value}
                   onChange={handlePhoneNumberChange}
                   onBlur={handlePhoneNumberChange}

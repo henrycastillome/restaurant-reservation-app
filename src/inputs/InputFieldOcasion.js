@@ -26,7 +26,7 @@ const InputWrapperTime = styled.div`
     border-radius: 4px;
     box-sizing: border-box;
     font-family: var(--body-font);
-    color: ${props => (props.hasValue ? "black" : "gray")};
+    color: ${(props) => (props.hasValue ? "black" : "gray")};
   }
   select:required:invalid {
     color: gray;
@@ -56,7 +56,13 @@ const ocasion = [
   "Just Because",
 ];
 
-const InputFieldOcasion = ({ value, onChange, isinvalid, onBlur, hasValue }) => {
+const InputFieldOcasion = ({
+  value,
+  onChange,
+  isinvalid,
+  onBlur,
+  hasValue,
+}) => {
   return (
     <InputWrapperTime isinvalid={isinvalid} hasValue={hasValue}>
       <label>
@@ -64,11 +70,11 @@ const InputFieldOcasion = ({ value, onChange, isinvalid, onBlur, hasValue }) => 
       </label>
 
       <select
+        data-testid="ocasion-component"
         name="ocasion"
         value={value}
         onChange={onChange}
         onBlur={onBlur}
-        
       >
         <option value="" disabled>
           Select..

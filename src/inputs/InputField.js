@@ -33,18 +33,20 @@ const InputWrapper = styled.div`
   }
 `;
 
-const InputField = ({ label, type, value, onChange, placeholder, htmlFor, isinvalid,onBlur}) => {
+const InputField = ({ label, type, value, onChange, placeholder, htmlFor, isinvalid,onBlur, id}) => {
   return (
    
     <InputWrapper isinvalid={isinvalid} >
-      <label>{label} <sup>*</sup></label>
+      <label id={id}>{label} <sup>*</sup></label>
       <input
+      
         type={type}
         value={value}
         onChange={onChange}
         placeholder={placeholder}
         htmlFor={htmlFor}
         onBlur={onBlur}
+        aria-labelledby={id}
       />
     </InputWrapper>
     

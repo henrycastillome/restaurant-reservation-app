@@ -47,7 +47,7 @@ const InputFieldSeat = ({ value, onChange, isinvalid, onBlur, hasValue }) => {
   return (
     <InputWrapperTime isinvalid={isinvalid} hasValue={hasValue}>
       <label>Seating Option<sup>*</sup></label>
-      <select name="seating" value={value} onChange={onChange} onBlur={onBlur} >
+      <select data-testid="seat-component" name="seating" value={value} onChange={onChange} onBlur={onBlur} >
         <option value="" disabled >
           Select..
         </option>

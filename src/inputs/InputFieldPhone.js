@@ -33,9 +33,12 @@ const InputWrapperDate = styled.div`
 const InputFieldPhone = ({ value, onChange, isinvalid, onBlur }) => {
   return (
     <InputWrapperDate isinvalid={isinvalid}>
-      <label>Phone Number <sup>*</sup></label>
+      <label htmlFor="phone">Phone Number <sup>*</sup></label>
       <input
+        data-testid="phone-component" 
         type='"tel"'
+        id='phone'
+        aria-labelledby="phone"
         value={value}
         onChange={onChange}
         placeholder="333-333-0000"

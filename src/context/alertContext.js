@@ -45,7 +45,7 @@ export const AlertProvider = ({ children }) => {
   return (
     <AlertContext.Provider
       value={{
-        
+      
         handleClick,
         alertWarning,
         alertSucess
