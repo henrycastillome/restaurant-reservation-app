@@ -9,6 +9,7 @@ import InputFieldTime from "../inputs/InputFieldTime";
 import InputFieldText from "../inputs/InputFieldText";
 import InputFieldOcasion from "../inputs/InputFieldOcasion";
 import ErrorMessage from "../inputs/ErrorMessage";
+import { useAlertContext } from "../context/alertContext";
 
 const isEmail = (email) => {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -34,7 +35,7 @@ const Reservations = () => {
   });
   const [guest, setGuest] = useState({
     value: "",
-    isTouched: false
+    isTouched: false,
   });
   const [timeOfDay, setTimeofDay] = useState({
     value: "",
@@ -91,61 +92,60 @@ const Reservations = () => {
   const maxDate = new Date();
   maxDate.setDate(maxDate.getDate() + 14);
 
-  const minDate= new Date();
-  
+  const minDate = new Date();
 
-  const formValidation=()=>{
+  const formValidation = () => {
     let isValid = true;
 
+    if (name.value === "") {
+      setName({ ...name, isTouched: true });
+      isValid = false;
+    }
+    if (lastName.value === "") {
+      setLastName({ ...lastName, isTouched: true });
+      isValid = false;
+    }
+    if (email.value === "") {
+      setEmail({ ...email, isTouched: true });
+      setIsInvalidEmail(true);
+      isValid = false;
+    }
+    if (
+      telephone.value === "" ||
+      (telephone.value.length <= 10 && telephone.isTouched)
+    ) {
+      setTelephone({ ...telephone, isTouched: true });
+      isValid = false;
+    }
+    if (
+      date.value === "" ||
+      new Date(date.value) > maxDate ||
+      new Date(date.value) < minDate
+    ) {
+      setDate({ ...date, isTouched: true });
+      isValid = false;
+    }
+    if (timeOfDay.value === "") {
+      setTimeofDay({ ...timeOfDay, isTouched: true });
+      isValid = false;
+    }
+    if (guest.value === "") {
+      setGuest({ ...guest, isTouched: true });
+      isValid = false;
+    }
+    if (seat.value === "") {
+      setSeat({ ...seat, isTouched: true });
+      isValid = false;
+    }
+    if (ocasion.value === "") {
+      setOcasion({ ...ocasion, isTouched: true });
+      isValid = false;
+    } else {
+      return isValid;
+    }
+  };
 
-
-  if (name.value === "") {
-    setName({ ...name, isTouched: true });
-    isValid = false;
-  }
-  if (lastName.value === "") {
-    setLastName({ ...lastName, isTouched: true });
-    isValid = false;
-  }
-  if (email.value === "") {
-    setEmail({ ...email, isTouched: true });
-    setIsInvalidEmail(true);
-    isValid = false;
-  }
-  if ((telephone.value === "")||(telephone.value.length <= 10 && telephone.isTouched)) {
-    setTelephone({ ...telephone, isTouched: true });
-    isValid = false;
-  }
-  if (date.value === ""  ||
-  (new Date(date.value) > maxDate) ||
-  (new Date(date.value) < minDate)) {
-    setDate({ ...date, isTouched: true });
-    isValid = false;
-  }
-  if (timeOfDay.value === "") {
-    setTimeofDay({ ...timeOfDay, isTouched: true });
-    isValid = false;
-  }
-  if (guest.value === "") {
-    setGuest({ ...guest, isTouched: true });
-    isValid = false;
-  }
-  if (seat.value === "") {
-    setSeat({ ...seat, isTouched: true });
-    isValid = false;
-  }
-  if (ocasion.value === "") {
-    setOcasion({ ...ocasion, isTouched: true });
-    isValid = false;
-  }
-
-  else{
-    
-    return isValid}
-
-  }
-
-  const clearForm=()=>{
+  const clearForm = () => {
     setName({
       value: "",
       isTouched: false,
@@ -164,7 +164,7 @@ const Reservations = () => {
     });
     setGuest({
       value: "",
-      isTouched: false
+      isTouched: false,
     });
     setTimeofDay({
       value: "",
@@ -174,7 +174,7 @@ const Reservations = () => {
       value: "",
       isTouched: false,
     });
-   setSpecial("");
+    setSpecial("");
     setTelephone({
       value: "",
       isTouched: false,
@@ -185,76 +185,62 @@ const Reservations = () => {
     });
     setIsInvalidEmail(false);
     setIsFormValid(false);
-  }
+  };
 
+  const {alertSucess}=useAlertContext();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    
-    
-    const isValid=formValidation();
-  
-  
-    
-    if(isValid){
-      setIsFormValid(true)
-    
-    const formData={
-   
-      name:name.value,
-      LastName: lastName.value,
-      email:email.value,
-      date: date.value,
-      phone:telephone.value,
-      time:timeOfDay.value,
-      guest:guest.value,
-      ocasion:ocasion.value,
 
+    const isValid = formValidation();
+
+    if (isValid) {
+      setIsFormValid(true);
+
+      const formData = {
+        name: name.value,
+        LastName: lastName.value,
+        email: email.value,
+        date: date.value,
+        phone: telephone.value,
+        time: timeOfDay.value,
+        guest: guest.value,
+        ocasion: ocasion.value,
+      };
+
+      
+      const formValues = Object.entries(formData)
+        .map(([key, value]) => `${key}: ${value}`)
+        .join("\n");
+      
+        alert(`Form submitted with the following values:\n\n${formValues}`);
+
+
+
+      
+      alertSucess({name:name.value,lastName:lastName.value})
+      
+      clearForm();
     }
-    const formValues = Object.entries(formData)
-      .map(([key, value]) => `${key}: ${value}`)
-      .join("\n");
-
-    alert(`Form submitted with the following values:\n\n${formValues}`);
-    clearForm()
-  }
- 
-  
-}
-  ;
-
+  };
   return (
     <div
-      style={{
-        paddingBottom: "4rem",
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "center",
-      }}
+     className="reservation"
+    
     >
       <div
-        style={{
-          backgroundColor: "var(--secondary-color-peach)",
-          margin: "8em",
-          padding: "2em",
-          boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
-          borderRadius: "16px",
-          width: "60vw",
-        }}
+       
+        className='reservation-card'
       >
-        <h1  style={{ color: "var(--primary-color-green" }}>Reservations</h1>
+        <h1
+          id="reservations-section"
+          style={{ color: "var(--primary-color-green" }}
+        >
+          Reservations
+        </h1>
 
         <form onSubmit={handleSubmit}>
-          <div
-            style={{
-              display: "block",
-              flexDirection: "row",
-              gap: "5vw",
-              width: "50vw",
-              justifyContent: "space-between",
-            }}
-          >
+          <div className="reservation-item">
             <InputField
               label="First Name"
               type="text"
@@ -274,15 +260,7 @@ const Reservations = () => {
               <ErrorMessage>Too short!</ErrorMessage>
             ) : null}
           </div>
-          <div
-            style={{
-              display: "block",
-              flexDirection: "row",
-              gap: "5vw",
-              width: "50vw",
-              justifyContent: "space-between",
-            }}
-          >
+          <div className="reservation-item">
             <InputField
               label="Last Name"
               type="text"
@@ -305,12 +283,7 @@ const Reservations = () => {
             ) : null}
           </div>
 
-          <div
-            style={{
-              display: "block",
-              width: "50vw",
-            }}
-          >
+          <div className="reservation-item">
             <InputField
               label="Email"
               type="text"
@@ -327,20 +300,14 @@ const Reservations = () => {
             ) : null}
           </div>
 
-          <div
-            style={{
-              display: "block",
-              gap: "5vw",
-              width: "50vw",
-            }}
-          >
+          <div className="reservation-item">
             <InputFieldPhone
               value={telephone.value}
               onChange={handlePhoneNumberChange}
               onBlur={handlePhoneNumberChange}
               isinvalid={
                 (telephone.isTouched && telephone.value === "") ||
-                (telephone.value.length <= 10 && telephone.isTouched) 
+                (telephone.value.length <= 10 && telephone.isTouched)
               }
             />
             {telephone.isTouched && telephone.value === "" ? (
@@ -351,13 +318,7 @@ const Reservations = () => {
           </div>
 
           <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              gap: "5vw",
-              width: "50vw",
-              justifyContent: "space-between",
-            }}
+            className="reservation-item-inline"
           >
             <div style={{ display: "block", width: "100%" }}>
               <InputFieldDate
@@ -366,8 +327,8 @@ const Reservations = () => {
                 onBlur={(e) => setDate({ ...date, isTouched: true })}
                 isinvalid={
                   (date.isTouched && date.value === "") ||
-                  (new Date(date.value) > maxDate) ||
-                  (new Date(date.value) < minDate)
+                  new Date(date.value) > maxDate ||
+                  new Date(date.value) < minDate
                 }
               />
               {date.isTouched && date.value === "" ? (
@@ -376,105 +337,69 @@ const Reservations = () => {
                 <ErrorMessage>
                   The date has to be no more than 2 weeks in advance
                 </ErrorMessage>
-              ) : new Date(date.value)< minDate && date.isTouched ?
-              (<ErrorMessage>
+              ) : new Date(date.value) < minDate && date.isTouched ? (
+                <ErrorMessage>
                   The date can't be earlier than today
-                </ErrorMessage>) : null}
+                </ErrorMessage>
+              ) : null}
             </div>
 
             <div style={{ display: "block", width: "100%" }}>
-
-            <InputFieldTime
-              value={timeOfDay.value}
-              hasValue={timeOfDay.value} //to add a place holder color gray to the select button in the component (check component)
-              onChange={(e) => setTimeofDay({...timeOfDay, value:e.target.value})}
-              onBlur={(e) => setTimeofDay({ ...timeOfDay, isTouched: true })}
-                isinvalid={
-                  (timeOfDay.isTouched && timeOfDay.value === "") 
+              <InputFieldTime
+                value={timeOfDay.value}
+                hasValue={timeOfDay.value} //to add a place holder color gray to the select button in the component (check component)
+                onChange={(e) =>
+                  setTimeofDay({ ...timeOfDay, value: e.target.value })
                 }
+                onBlur={(e) => setTimeofDay({ ...timeOfDay, isTouched: true })}
+                isinvalid={timeOfDay.isTouched && timeOfDay.value === ""}
               />
               {timeOfDay.isTouched && timeOfDay.value === "" ? (
                 <ErrorMessage>Required</ErrorMessage>
-              )  : null}
-            
-            
-
+              ) : null}
             </div>
           </div>
 
-          <div
-            style={{
-              display: "block",
-              gap: "5vw",
-              width: "50vw",
-            }}
-          >
+          <div className="reservation-item">
             <InputFieldGuest
               value={guest.value}
               hasValue={guest.value}
-              onChange={(e) => setGuest({...guest, value:e.target.value})}
+              onChange={(e) => setGuest({ ...guest, value: e.target.value })}
               onBlur={(e) => setGuest({ ...guest, isTouched: true })}
-              isinvalid={
-                (guest.isTouched && guest.value === "") 
-              }
+              isinvalid={guest.isTouched && guest.value === ""}
             />
             {guest.isTouched && guest.value === "" ? (
               <ErrorMessage>Required</ErrorMessage>
-            )  : null}
-            
+            ) : null}
           </div>
-          <div
-            style={{
-              display: 'block',
-              gap: "5vw",
-              width: "50vw",
-            }}
-          >
+          <div className="reservation-item">
             <InputFieldSeat
               value={seat.value}
               hasValue={seat.value}
-              onChange={(e) => setSeat({...seat, value:e.target.value})}
+              onChange={(e) => setSeat({ ...seat, value: e.target.value })}
               onBlur={(e) => setSeat({ ...seat, isTouched: true })}
-              isinvalid={
-                (seat.isTouched && seat.value === "") 
-              }
+              isinvalid={seat.isTouched && seat.value === ""}
             />
             {seat.isTouched && seat.value === "" ? (
               <ErrorMessage>Required</ErrorMessage>
-            )  : null}
-            
+            ) : null}
           </div>
-          <div
-            style={{
-              display: 'block',
-              gap: "5vw",
-              width: "50vw",
-            }}
-          >
+          <div className="reservation-item">
             <InputFieldOcasion
               value={ocasion.value}
               hasValue={ocasion.value}
-              onChange={(e) => setOcasion({...ocasion, value:e.target.value})}
-              onBlur={(e) => setOcasion({ ...ocasion, isTouched: true })}
-              isinvalid={
-                (ocasion.isTouched && ocasion.value === "") 
+              onChange={(e) =>
+                setOcasion({ ...ocasion, value: e.target.value })
               }
+              onBlur={(e) => setOcasion({ ...ocasion, isTouched: true })}
+              isinvalid={ocasion.isTouched && ocasion.value === ""}
             />
             {ocasion.isTouched && ocasion.value === "" ? (
               <ErrorMessage>Required</ErrorMessage>
-            )  : null}
-            
+            ) : null}
           </div>
 
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              gap: "5vw",
-              width: "50vw",
-              justifyContent: "space-between",
-            }}
-          >
+          <div className="reservation-item">
             <InputFieldText
               type="text"
               label="Special Request"
@@ -484,17 +409,11 @@ const Reservations = () => {
             />
           </div>
           <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              gap: "5vw",
-              width: "50vw",
-              justifyContent: "space-between",
-              marginTop:"2rem"
-            }}
+            className="reservation-item"
           >
-            <Button type="submit" disabled={isFormValid} >
-              { isFormValid? "Submitting" : "Submit" }</Button>
+            <Button type="submit" disabled={isFormValid}>
+              {isFormValid ? "Submitting" : "Submit"}
+            </Button>
           </div>
         </form>
       </div>

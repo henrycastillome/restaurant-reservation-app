@@ -1,19 +1,21 @@
 import './App.css';
 import Footer from './components/Footer';
-import Header from './components/Header';
+import Hero from './components/Hero';
 import Main from './components/Main';
 import Nav from './components/Nav';
+import { AlertProvider } from "./context/alertContext";
 
 function App() {
   return (
     <>
+    <AlertProvider>
     <div className='grid-container'>
     <Nav />
-    <Header />
+    <Hero />
      <Main />
     <Footer />
     </div>
-    
+    </AlertProvider>
     </>
   );
 }

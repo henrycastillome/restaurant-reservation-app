@@ -2,6 +2,10 @@ import Button from "./Button";
 import Cards from "./Card";
 import Reservations from "./Reservations";
 import Testimonial from "./Testimonial";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useAlertContext } from "../context/alertContext";
+
 const plates = [
   {
     title: "Greek salad",
@@ -56,27 +60,31 @@ const testimony = [
     getImageSrc: "https://i.pravatar.cc/150?img=18",
   },
   {
-    name:"Henry",
-    title:"The best experience",
-    review:"First time having mediterranean food, and now I want to eat there every day",
-    getImageSrc: "https://i.pravatar.cc/150?img=2"
-
-  }
+    name: "Henry",
+    title: "The best experience",
+    review:
+      "First time having mediterranean food, and now I want to eat there every day",
+    getImageSrc: "https://i.pravatar.cc/150?img=2",
+  },
 ];
 
 const Main = () => {
+  const { alertWarning } = useAlertContext();
+
   return (
     <main>
-       <div
-        className="stack-horizontal"
-        style={{ width: "100%", gap:'2rem'}}
-      >
-        <h1 style={{ color: "var(--primary-color-green)" }}>Specials</h1>
+      <div className="stack-horizontal" style={{ width: "100%", gap: "2rem" }}>
+        <h1
+          id="specials-section"
+          style={{ color: "var(--primary-color-green)" }}
+        >
+          Specials
+        </h1>
         <div>
-          <Button >Order Now</Button>
+          <Button onClick={alertWarning}>Order Now</Button>
+          <ToastContainer style={{ color: "red" }} />
         </div>
       </div>
-      
 
       <div className="stack-horizontal" style={{ padding: "2rem" }}>
         {plates.map((plate) => (
@@ -89,10 +97,9 @@ const Main = () => {
           />
         ))}
       </div>
-     
 
       <div className="testimonials">
-        <h1>Testimonials</h1>
+        <h1 id="reviews-section">Testimonials</h1>
         <div
           className="stack-horizontal"
           style={{
