@@ -5,6 +5,9 @@ import Testimonial from "./Testimonial";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useAlertContext } from "../context/alertContext";
+import { Slide } from "react-awesome-reveal";
+
+
 
 const plates = [
   {
@@ -73,6 +76,7 @@ const Main = () => {
 
   return (
     <main>
+      <Slide cascade duration={2000}>
       <div className="stack-horizontal" style={{ width: "100%", gap: "2rem" }}>
         <h1
           id="specials-section"
@@ -85,9 +89,11 @@ const Main = () => {
           <ToastContainer style={{ color: "red" }} />
         </div>
       </div>
-
+      </Slide >
+      <Slide direction={'right'} cascade duration={3000}>
       <div className="stack-horizontal" style={{ padding: "2rem" }}>
         {plates.map((plate) => (
+          
           <Cards
             key={plate.title}
             title={plate.title}
@@ -95,11 +101,16 @@ const Main = () => {
             imageSrc={plate.getImageSrc()}
             price={plate.price}
           />
+          
         ))}
       </div>
-
+      </Slide>
+      
       <div className="testimonials">
+      <Slide cascade duration={2000}>
         <h1 id="reviews-section">Testimonials</h1>
+        </Slide>
+        <Slide direction={'right'} cascade duration={3000}>
         <div
           className="stack-horizontal"
           style={{
@@ -118,6 +129,7 @@ const Main = () => {
             />
           ))}
         </div>
+        </Slide>
       </div>
       <Reservations />
     </main>

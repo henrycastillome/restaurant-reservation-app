@@ -3,6 +3,7 @@ import logoLittleLemon from "../images/Logo.svg";
 import { useAlertContext } from "../context/alertContext";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Slide } from "react-awesome-reveal";
 
 const logo = [
   {
@@ -21,18 +22,22 @@ const Nav = () => {
   };
   return (
     <>
+    
       <nav className="nav-bar">
+        <div className="stack-horizontal">
         {logo.map((logos) => (
           <img src={logos.src} alt={logos.alt} key={logos.id} />
         ))}
+        </div>
 
-        <ul>
-          <button>Home</button>
+        <div className="stack-horizontal">
+          {<button>Home</button>}
           {<button onClick={handleClick("specials")}>Specials</button>}
           {<button onClick={handleClick("reviews")}>Reviews</button>}
           {<button onClick={handleClick("reservations")}>Reservations</button>}
-        </ul>
+        </div>
       </nav>
+      
 
       <nav className="burger">
         <div className="stack-horizontal">

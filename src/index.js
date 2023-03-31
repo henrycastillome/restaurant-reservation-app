@@ -8,10 +8,10 @@ import 'react-custom-alert/dist/index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  <React.Fragment>
     <App />
     <ToastContainer floatingTime={5000} />
-  </React.StrictMode>
+  </React.Fragment>
 );
 
 // If you want to start measuring performance in your app, pass a function

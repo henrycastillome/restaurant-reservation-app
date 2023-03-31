@@ -10,6 +10,9 @@ import InputFieldText from "../inputs/InputFieldText";
 import InputFieldOcasion from "../inputs/InputFieldOcasion";
 import ErrorMessage from "../inputs/ErrorMessage";
 import { useAlertContext } from "../context/alertContext";
+import {  Slide } from "react-awesome-reveal";
+
+
 
 const isEmail = (email) => {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -187,7 +190,7 @@ const Reservations = () => {
     setIsFormValid(false);
   };
 
-  const {alertSucess}=useAlertContext();
+  const { alertSucess } = useAlertContext();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -208,215 +211,227 @@ const Reservations = () => {
         ocasion: ocasion.value,
       };
 
-      
       const formValues = Object.entries(formData)
         .map(([key, value]) => `${key}: ${value}`)
         .join("\n");
-      
-        alert(`Form submitted with the following values:\n\n${formValues}`);
 
+      alert(`Form submitted with the following values:\n\n${formValues}`);
 
+      alertSucess({ name: name.value, lastName: lastName.value });
 
-      
-      alertSucess({name:name.value,lastName:lastName.value})
-      
       clearForm();
     }
   };
   return (
-    <div
-     className="reservation"
-    
-    >
-      <div
-       
-        className='reservation-card'
-      >
-        <h1
-          id="reservations-section"
-          style={{ color: "var(--primary-color-green" }}
-        >
-          Reservations
-        </h1>
+    <div className="reservation">
+      
+        <div className="reservation-card">
+          <Slide duration={3000} cascade triggerOnce>
+            <h1
+              id="reservations-section"
+              style={{ color: "var(--primary-color-green" }}
+            >
+              Reservations
+            </h1>
+          </Slide>
 
-        <form onSubmit={handleSubmit}>
-          <div className="reservation-item">
-            <InputField
-              label="First Name"
-              type="text"
-              htmlFor="text"
-              value={name.value}
-              placeholder="Enter your first name"
-              onChange={(e) => setName({ ...name, value: e.target.value })}
-              onBlur={(e) => setName({ ...name, isTouched: true })}
-              isinvalid={
-                (name.isTouched && name.value === "") ||
-                (name.value.length < 4 && name.isTouched)
-              }
-            />
-            {name.isTouched && name.value === "" ? (
-              <ErrorMessage>Required</ErrorMessage>
-            ) : name.value.length < 4 && name.isTouched ? (
-              <ErrorMessage>Too short!</ErrorMessage>
-            ) : null}
-          </div>
-          <div className="reservation-item">
-            <InputField
-              label="Last Name"
-              type="text"
-              htmlFor="text"
-              value={lastName.value}
-              placeholder="Enter your last name"
-              onChange={(e) =>
-                setLastName({ ...lastName, value: e.target.value })
-              }
-              onBlur={(e) => setLastName({ ...lastName, isTouched: true })}
-              isinvalid={
-                (lastName.isTouched && lastName.value === "") ||
-                (lastName.value.length < 4 && lastName.isTouched)
-              }
-            />
-            {lastName.isTouched && lastName.value === "" ? (
-              <ErrorMessage>Required</ErrorMessage>
-            ) : lastName.value.length < 4 && lastName.isTouched ? (
-              <ErrorMessage>Too short!</ErrorMessage>
-            ) : null}
-          </div>
+          <form onSubmit={handleSubmit}>
+            <Slide duration={2000} cascade triggerOnce>
+              <div className="reservation-item">
+                <InputField
+                  label="First Name"
+                  type="text"
+                  htmlFor="text"
+                  value={name.value}
+                  placeholder="Enter your first name"
+                  onChange={(e) => setName({ ...name, value: e.target.value })}
+                  onBlur={(e) => setName({ ...name, isTouched: true })}
+                  isinvalid={
+                    (name.isTouched && name.value === "") ||
+                    (name.value.length < 4 && name.isTouched)
+                  }
+                />
+                {name.isTouched && name.value === "" ? (
+                  <ErrorMessage>Required</ErrorMessage>
+                ) : name.value.length < 4 && name.isTouched ? (
+                  <ErrorMessage>Too short!</ErrorMessage>
+                ) : null}
+              </div>
+            </Slide>
+            <Slide duration={2000} cascade triggerOnce>
+              <div className="reservation-item">
+                <InputField
+                  label="Last Name"
+                  type="text"
+                  htmlFor="text"
+                  value={lastName.value}
+                  placeholder="Enter your last name"
+                  onChange={(e) =>
+                    setLastName({ ...lastName, value: e.target.value })
+                  }
+                  onBlur={(e) => setLastName({ ...lastName, isTouched: true })}
+                  isinvalid={
+                    (lastName.isTouched && lastName.value === "") ||
+                    (lastName.value.length < 4 && lastName.isTouched)
+                  }
+                />
+                {lastName.isTouched && lastName.value === "" ? (
+                  <ErrorMessage>Required</ErrorMessage>
+                ) : lastName.value.length < 4 && lastName.isTouched ? (
+                  <ErrorMessage>Too short!</ErrorMessage>
+                ) : null}
+              </div>
+            </Slide>
+            <Slide duration={2000} cascade triggerOnce>
+              <div className="reservation-item">
+                <InputField
+                  label="Email"
+                  type="text"
+                  value={email.value}
+                  placeholder="Enter your email"
+                  onChange={handleEmail}
+                  isinvalid={isInvalidEmail}
+                  onBlur={handleEmail}
+                />
+                {email.isTouched && email.value === "" ? (
+                  <ErrorMessage>Required</ErrorMessage>
+                ) : isInvalidEmail ? (
+                  <ErrorMessage>Invalid Email</ErrorMessage>
+                ) : null}
+              </div>
+            </Slide>
+            <Slide duration={2000} cascade triggerOnce>
+              <div className="reservation-item" >
+                <InputFieldPhone
+                  value={telephone.value}
+                  onChange={handlePhoneNumberChange}
+                  onBlur={handlePhoneNumberChange}
+                  isinvalid={
+                    (telephone.isTouched && telephone.value === "") ||
+                    (telephone.value.length <= 10 && telephone.isTouched)
+                  }
+                />
+                {telephone.isTouched && telephone.value === "" ? (
+                  <ErrorMessage>Required</ErrorMessage>
+                ) : telephone.value.length < 14 && telephone.isTouched ? (
+                  <ErrorMessage>too short! you need 10 digits</ErrorMessage>
+                ) : null}
+              </div>
+            </Slide>
+            <Slide duration={2000} cascade triggerOnce>
+              <div className="reservation-item-inline">
+                <div style={{ display: "block", width: "100%" }}>
+                  <InputFieldDate
+                    value={date.value}
+                    onChange={(e) =>
+                      setDate({ ...date, value: e.target.value })
+                    }
+                    onBlur={(e) => setDate({ ...date, isTouched: true })}
+                    isinvalid={
+                      (date.isTouched && date.value === "") ||
+                      new Date(date.value) > maxDate ||
+                      new Date(date.value) < minDate
+                    }
+                  />
+                  {date.isTouched && date.value === "" ? (
+                    <ErrorMessage>Required</ErrorMessage>
+                  ) : new Date(date.value) > maxDate && date.isTouched ? (
+                    <ErrorMessage>
+                      The date has to be no more than 2 weeks in advance
+                    </ErrorMessage>
+                  ) : new Date(date.value) < minDate && date.isTouched ? (
+                    <ErrorMessage>
+                      The date can't be earlier than today
+                    </ErrorMessage>
+                  ) : null}
+                </div>
 
-          <div className="reservation-item">
-            <InputField
-              label="Email"
-              type="text"
-              value={email.value}
-              placeholder="Enter your email"
-              onChange={handleEmail}
-              isinvalid={isInvalidEmail}
-              onBlur={handleEmail}
-            />
-            {email.isTouched && email.value === "" ? (
-              <ErrorMessage>Required</ErrorMessage>
-            ) : isInvalidEmail ? (
-              <ErrorMessage>Invalid Email</ErrorMessage>
-            ) : null}
-          </div>
+                <div style={{ display: "block", width: "100%" }}>
+                  <InputFieldTime
+                    value={timeOfDay.value}
+                    hasValue={timeOfDay.value} //to add a place holder color gray to the select button in the component (check component)
+                    onChange={(e) =>
+                      setTimeofDay({ ...timeOfDay, value: e.target.value })
+                    }
+                    onBlur={(e) =>
+                      setTimeofDay({ ...timeOfDay, isTouched: true })
+                    }
+                    isinvalid={timeOfDay.isTouched && timeOfDay.value === ""}
+                  />
+                  {timeOfDay.isTouched && timeOfDay.value === "" ? (
+                    <ErrorMessage>Required</ErrorMessage>
+                  ) : null}
+                </div>
+              </div>
+            </Slide>
 
-          <div className="reservation-item">
-            <InputFieldPhone
-              value={telephone.value}
-              onChange={handlePhoneNumberChange}
-              onBlur={handlePhoneNumberChange}
-              isinvalid={
-                (telephone.isTouched && telephone.value === "") ||
-                (telephone.value.length <= 10 && telephone.isTouched)
-              }
-            />
-            {telephone.isTouched && telephone.value === "" ? (
-              <ErrorMessage>Required</ErrorMessage>
-            ) : telephone.value.length < 14 && telephone.isTouched ? (
-              <ErrorMessage>too short! you need 10 digits</ErrorMessage>
-            ) : null}
-          </div>
-
-          <div
-            className="reservation-item-inline"
-          >
-            <div style={{ display: "block", width: "100%" }}>
-              <InputFieldDate
-                value={date.value}
-                onChange={(e) => setDate({ ...date, value: e.target.value })}
-                onBlur={(e) => setDate({ ...date, isTouched: true })}
-                isinvalid={
-                  (date.isTouched && date.value === "") ||
-                  new Date(date.value) > maxDate ||
-                  new Date(date.value) < minDate
-                }
-              />
-              {date.isTouched && date.value === "" ? (
-                <ErrorMessage>Required</ErrorMessage>
-              ) : new Date(date.value) > maxDate && date.isTouched ? (
-                <ErrorMessage>
-                  The date has to be no more than 2 weeks in advance
-                </ErrorMessage>
-              ) : new Date(date.value) < minDate && date.isTouched ? (
-                <ErrorMessage>
-                  The date can't be earlier than today
-                </ErrorMessage>
-              ) : null}
-            </div>
-
-            <div style={{ display: "block", width: "100%" }}>
-              <InputFieldTime
-                value={timeOfDay.value}
-                hasValue={timeOfDay.value} //to add a place holder color gray to the select button in the component (check component)
-                onChange={(e) =>
-                  setTimeofDay({ ...timeOfDay, value: e.target.value })
-                }
-                onBlur={(e) => setTimeofDay({ ...timeOfDay, isTouched: true })}
-                isinvalid={timeOfDay.isTouched && timeOfDay.value === ""}
-              />
-              {timeOfDay.isTouched && timeOfDay.value === "" ? (
-                <ErrorMessage>Required</ErrorMessage>
-              ) : null}
-            </div>
-          </div>
-
-          <div className="reservation-item">
-            <InputFieldGuest
-              value={guest.value}
-              hasValue={guest.value}
-              onChange={(e) => setGuest({ ...guest, value: e.target.value })}
-              onBlur={(e) => setGuest({ ...guest, isTouched: true })}
-              isinvalid={guest.isTouched && guest.value === ""}
-            />
-            {guest.isTouched && guest.value === "" ? (
-              <ErrorMessage>Required</ErrorMessage>
-            ) : null}
-          </div>
-          <div className="reservation-item">
-            <InputFieldSeat
-              value={seat.value}
-              hasValue={seat.value}
-              onChange={(e) => setSeat({ ...seat, value: e.target.value })}
-              onBlur={(e) => setSeat({ ...seat, isTouched: true })}
-              isinvalid={seat.isTouched && seat.value === ""}
-            />
-            {seat.isTouched && seat.value === "" ? (
-              <ErrorMessage>Required</ErrorMessage>
-            ) : null}
-          </div>
-          <div className="reservation-item">
-            <InputFieldOcasion
-              value={ocasion.value}
-              hasValue={ocasion.value}
-              onChange={(e) =>
-                setOcasion({ ...ocasion, value: e.target.value })
-              }
-              onBlur={(e) => setOcasion({ ...ocasion, isTouched: true })}
-              isinvalid={ocasion.isTouched && ocasion.value === ""}
-            />
-            {ocasion.isTouched && ocasion.value === "" ? (
-              <ErrorMessage>Required</ErrorMessage>
-            ) : null}
-          </div>
-
-          <div className="reservation-item">
-            <InputFieldText
-              type="text"
-              label="Special Request"
-              placeholder="Enter any special request here..."
-              onChange={(e) => setSpecial(e.target.value)}
-              value={special}
-            />
-          </div>
-          <div
-            className="reservation-item"
-          >
-            <Button type="submit" disabled={isFormValid}>
-              {isFormValid ? "Submitting" : "Submit"}
-            </Button>
-          </div>
-        </form>
-      </div>
+            <Slide duration={2000} cascade triggerOnce>
+              <div className="reservation-item">
+                <InputFieldGuest
+                  value={guest.value}
+                  hasValue={guest.value}
+                  onChange={(e) =>
+                    setGuest({ ...guest, value: e.target.value })
+                  }
+                  onBlur={(e) => setGuest({ ...guest, isTouched: true })}
+                  isinvalid={guest.isTouched && guest.value === ""}
+                />
+                {guest.isTouched && guest.value === "" ? (
+                  <ErrorMessage>Required</ErrorMessage>
+                ) : null}
+              </div>
+            </Slide>
+            <Slide duration={2000} cascade triggerOnce>
+              <div className="reservation-item">
+                <InputFieldSeat
+                  value={seat.value}
+                  hasValue={seat.value}
+                  onChange={(e) => setSeat({ ...seat, value: e.target.value })}
+                  onBlur={(e) => setSeat({ ...seat, isTouched: true })}
+                  isinvalid={seat.isTouched && seat.value === ""}
+                />
+                {seat.isTouched && seat.value === "" ? (
+                  <ErrorMessage>Required</ErrorMessage>
+                ) : null}
+              </div>
+            </Slide>
+            <Slide duration={2000} cascade triggerOnce>
+              <div className="reservation-item">
+                <InputFieldOcasion
+                  value={ocasion.value}
+                  hasValue={ocasion.value}
+                  onChange={(e) =>
+                    setOcasion({ ...ocasion, value: e.target.value })
+                  }
+                  onBlur={(e) => setOcasion({ ...ocasion, isTouched: true })}
+                  isinvalid={ocasion.isTouched && ocasion.value === ""}
+                />
+                {ocasion.isTouched && ocasion.value === "" ? (
+                  <ErrorMessage>Required</ErrorMessage>
+                ) : null}
+              </div>
+            </Slide>
+            <Slide duration={2000} cascade triggerOnce>
+              <div className="reservation-item">
+                <InputFieldText
+                  type="text"
+                  label="Special Request"
+                  placeholder="Enter any special request here..."
+                  onChange={(e) => setSpecial(e.target.value)}
+                  value={special}
+                />
+              </div>
+            </Slide>
+            <Slide duration={2000} cascade triggerOnce>
+              <div className="reservation-item">
+                <Button type="submit" disabled={isFormValid}>
+                  {isFormValid ? "Submitting" : "Submit"}
+                </Button>
+              </div>
+            </Slide>
+          </form>
+        </div>
+      
     </div>
   );
 };

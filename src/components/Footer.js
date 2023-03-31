@@ -6,7 +6,9 @@ import {
     faFacebook,
     faTiktok,
   } from "@fortawesome/free-brands-svg-icons"
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {  Slide } from "react-awesome-reveal";
 
 const logo = [
   {
@@ -50,6 +52,7 @@ const Footer = () => {
         ))}
       </div>
       <div className="stack-horizontal" style={{ padding: "0 0" }}>
+      <Slide direction="left" cascade duraction={2000}>
         <div className="stack-vertical">
           <h6> Navigation</h6>
 
@@ -58,6 +61,8 @@ const Footer = () => {
           {<button onClick={handleClick("reviews")}>Reviews</button>}
           {<button onClick={handleClick("reservations")}>Reservations</button>}
         </div>
+        </Slide>
+      <Slide direction="down" cascade duraction={3000}>
         <div className="stack-vertical">
           <h6> Contact</h6>
 
@@ -69,6 +74,8 @@ const Footer = () => {
           </a>
           <a href={`mailto:${email}`}>Contact us</a>
         </div>
+        </Slide>
+        <Slide direction="right" cascade duraction={4000}>
 
         <div className="stack-vertical">
           <h6> Social Media</h6>
@@ -79,8 +86,9 @@ const Footer = () => {
                 </a>
             ))}
             </div>
-         
+            
         </div>
+        </Slide>
       </div>
     </footer>
   );

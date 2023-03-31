@@ -82,30 +82,37 @@ main h1 {
 
 
 
-ul {
+ul  {
   list-style-type: none;
-  display: inline;
+  
 
 
 }
 
-li {
-  display: inline;
-  padding: 10px;
-
-
-}
-
-.nav-bar {
-  grid-area: nav;
+.nav-bar .stack-horizontal{
+  gap: 3rem;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  font-family: var(--body-font);
-  color: var(--secondary-color-black);
-  font-size: medium;
-  padding: 1rem 10rem;
+  flex-wrap: nowrap;
+
+}
+
+
+
+.nav-bar {
+
+  grid-area: nav;
+    position:fixed;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap:30rem;
+    width: 100vw;
+    z-index: 1000;
+    padding: 2rem 0;
+    background-color: var(--secondary-color-white);
+    border-bottom: 1px solid var(--primary-color-green)
 
 
 
@@ -334,7 +341,7 @@ sup {
 
 nav.nav-bar button {
   border: none;
-  padding-right: 2rem;
+  
   font-family: var(--title-font);
   font-size: x-large;
 
@@ -543,8 +550,10 @@ section .stack-vertical {
   }
 
   section .stack-vertical p {
-    width: 40%;
-    line-height: 1.5rem;
+    margin: auto;
+    padding-top:1rem ;
+    padding-bottom: 1rem;
+   
   }
 
 
@@ -552,6 +561,7 @@ section .stack-vertical {
   .nav-bar {
     display: none;
   }
+  
 
   .burger {
     grid-area: nav;
@@ -565,6 +575,8 @@ section .stack-vertical {
     background-color: var(--secondary-color-white);
     border-bottom: 1px solid var(--primary-color-green);
   }
+
+  
 
   nav.burger button {
     border: none;
@@ -630,6 +642,7 @@ section .stack-vertical {
   }
 
   section .stack-vertical p {
+    display: block;
     width: 50%;
     line-height: 1.5rem;
     text-align: center;
