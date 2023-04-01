@@ -2,13 +2,13 @@ import React from "react";
 import logoLittleLemon from "../images/Logo2.svg";
 import { useAlertContext } from "../context/alertContext";
 import {
-    faInstagram,
-    faFacebook,
-    faTiktok,
-  } from "@fortawesome/free-brands-svg-icons"
+  faInstagram,
+  faFacebook,
+  faTiktok,
+} from "@fortawesome/free-brands-svg-icons";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {  Slide } from "react-awesome-reveal";
+import { Slide } from "react-awesome-reveal";
 
 const logo = [
   {
@@ -18,23 +18,23 @@ const logo = [
   },
 ];
 
-const socials=[
-    {
-        id:"faInstagram",
-        icon:faInstagram,
-        url:"www.instagram.com"
-    },
-    {
-        id:'faFacebook',
-        icon:faFacebook,
-        url:"www.facebook.com"
-    },
-    {
-        id:'faTiktok',
-        icon:faTiktok,
-        url:'www.tiktok.com'
-    }
-]
+const socials = [
+  {
+    id: "faInstagram",
+    icon: faInstagram,
+    url: "www.instagram.com",
+  },
+  {
+    id: "faFacebook",
+    icon: faFacebook,
+    url: "www.facebook.com",
+  },
+  {
+    id: "faTiktok",
+    icon: faTiktok,
+    url: "www.tiktok.com",
+  },
+];
 
 const Footer = () => {
   const { handleClick } = useAlertContext();
@@ -52,42 +52,54 @@ const Footer = () => {
         ))}
       </div>
       <div className="stack-horizontal" style={{ padding: "0 0" }}>
-      <Slide direction="left" cascade >
-        <div className="stack-vertical">
-          <h6> Navigation</h6>
+        <Slide direction="left" cascade>
+          <div className="stack-vertical">
+            <h6> Navigation</h6>
 
-          <button>Home</button>
-          {<button onClick={handleClick("specials")}>Specials</button>}
-          {<button onClick={handleClick("reviews")}>Reviews</button>}
-          {<button onClick={handleClick("reservations")}>Reservations</button>}
-        </div>
+            <button>Home</button>
+            {<button onClick={handleClick("specials")}>Specials</button>}
+            {<button onClick={handleClick("reviews")}>Reviews</button>}
+            {
+              <button onClick={handleClick("reservations")}>
+                Reservations
+              </button>
+            }
+          </div>
         </Slide>
-      <Slide direction="down" cascade >
-        <div className="stack-vertical">
-          <h6> Contact</h6>
+        <Slide direction="down" cascade>
+          <div className="stack-vertical">
+            <h6> Contact</h6>
 
-          <a href={mapUrl} target="_blank" rel="noreferrer">
-            432 N Clark St, Chicago, IL 60654
-          </a>
-          <a href={`tel:${phoneNumber}`} rel="noreferrer">
-            call us at 312-954-3087
-          </a>
-          <a href={`mailto:${email}`}>Contact us</a>
-        </div>
+            <a href={mapUrl} target="_blank" rel="noreferrer">
+              432 N Clark St, Chicago, IL 60654
+            </a>
+            <a href={`tel:${phoneNumber}`} rel="noreferrer">
+              call us at 312-954-3087
+            </a>
+            <a href={`mailto:${email}`}>Contact us</a>
+          </div>
         </Slide>
-        <Slide direction="right" cascade >
-
-        <div className="stack-vertical">
-          <h6> Social Media</h6>
-          <div className="stack-horizontal">
-            {socials.map(icons=>(
-                <a key={icons.id} href={icons.url} target='_blank' rel="noopener noreferrer" title={icons.url}>
-                    <FontAwesomeIcon icon={icons.icon} size='xl' style={{filter:'brightness(80%)'}}/>
+        <Slide direction="right" cascade>
+          <div className="stack-vertical">
+            <h6> Social Media</h6>
+            <div className="stack-horizontal">
+              {socials.map((icons) => (
+                <a
+                  key={icons.id}
+                  href={icons.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={icons.url}
+                >
+                  <FontAwesomeIcon
+                    icon={icons.icon}
+                    size="xl"
+                    style={{ filter: "brightness(80%)" }}
+                  />
                 </a>
-            ))}
+              ))}
             </div>
-            
-        </div>
+          </div>
         </Slide>
       </div>
     </footer>

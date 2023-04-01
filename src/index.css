@@ -82,14 +82,14 @@ main h1 {
 
 
 
-ul  {
+ul {
   list-style-type: none;
-  
+
 
 
 }
 
-.nav-bar .stack-horizontal{
+.nav-bar .stack-horizontal {
   gap: 3rem;
   display: flex;
   flex-direction: row;
@@ -102,20 +102,17 @@ ul  {
 .nav-bar {
 
   grid-area: nav;
-    position:fixed;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap:30rem;
-    width: 100vw;
-    z-index: 1000;
-    padding: 2rem 0;
-    background-color: var(--secondary-color-white);
-    border-bottom: 1px solid var(--primary-color-green)
-
-
-
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 30rem;
+  width: 100vw;
+  z-index: 1000;
+  padding: 2rem 0;
+  background-color: var(--secondary-color-white);
+  border-bottom: 1px solid var(--primary-color-green)
 }
 
 section .stack-vertical p {
@@ -165,7 +162,8 @@ footer .stack-horizontal {
   align-items: flex-start;
   padding: 0;
 }
-footer .stack-horizontal:last-child{
+
+footer .stack-horizontal:last-child {
 
   gap: 3rem;
 }
@@ -187,7 +185,6 @@ footer button {
   color: var(--primary-color-yellow);
   padding: 0.5rem 0;
   background-color: transparent;
-
   cursor: pointer;
 
 }
@@ -207,8 +204,6 @@ footer a {
 
 footer a:hover {
   color: var(--secondary-color-white);
-
-
 }
 
 .stack-vertical {
@@ -230,8 +225,6 @@ footer a:hover {
   flex-wrap: wrap;
 }
 
-
-
 /* input fields */
 
 form {
@@ -241,20 +234,6 @@ form {
   align-items: center;
   font-family: var(--body-font)
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 .image {
@@ -318,7 +297,7 @@ sup {
   padding-top: 1rem;
 }
 
-.reservation-item-inline{
+.reservation-item-inline {
   display: flex;
   flex-direction: row;
   gap: 5vw;
@@ -341,7 +320,7 @@ sup {
 
 nav.nav-bar button {
   border: none;
-  
+
   font-family: var(--title-font);
   font-size: x-large;
 
@@ -513,7 +492,8 @@ section .stack-vertical {
 .burger {
   display: none;
 }
-.reservation-card{
+
+.reservation-card {
   background-color: var(--secondary-color-peach);
   margin: 8em;
   padding: 2em;
@@ -521,7 +501,8 @@ section .stack-vertical {
   border-radius: 16px;
   width: 60vw;
 }
-.reservation{
+
+.reservation {
   padding-bottom: 4rem;
   display: flex;
   flex-direction: row;
@@ -539,7 +520,7 @@ section .stack-vertical {
   section {
     background-image: url('./images/restaurantchef.png');
     max-inline-size: 100%;
-  
+
   }
 
   section .stack-vertical {
@@ -551,9 +532,9 @@ section .stack-vertical {
 
   section .stack-vertical p {
     margin: auto;
-    padding-top:1rem ;
+    padding-top: 1rem;
     padding-bottom: 1rem;
-   
+
   }
 
 
@@ -561,11 +542,11 @@ section .stack-vertical {
   .nav-bar {
     display: none;
   }
-  
+
 
   .burger {
     grid-area: nav;
-    position:fixed;
+    position: fixed;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -576,7 +557,7 @@ section .stack-vertical {
     border-bottom: 1px solid var(--primary-color-green);
   }
 
-  
+
 
   nav.burger button {
     border: none;
@@ -647,35 +628,41 @@ section .stack-vertical {
     line-height: 1.5rem;
     text-align: center;
   }
-  
-  .reservation-card{
-    margin:2rem;
+
+  .reservation-card {
+    margin: 2rem;
     padding: 2rem;
     width: 100vw;
   }
-  .reservation-item{
+
+  .reservation-item {
     width: 75vw;
   }
-  .reservation-item-inline{
+
+  .reservation-item-inline {
     width: 75vw;
   }
-  h1{
+
+  h1 {
     font-size: 4rem;
   }
+
   footer .stack-horizontal {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
-  footer .stack-vertical{
+
+  footer .stack-vertical {
     align-items: center;
   }
-  footer .stack-horizontal:last-child{
+
+  footer .stack-horizontal:last-child {
 
     gap: 1rem;
   }
- 
+
 
 
 }
@@ -684,24 +671,27 @@ section .stack-vertical {
   body {
     width: 100vw;
   }
-   
+
 
   section {
     background-image: url('./images/restauranfood.jpg');
     max-inline-size: 100%;
   }
-  .reservation-card{
-    margin:2rem;
+
+  .reservation-card {
+    margin: 2rem;
     padding: 2rem;
     width: 100vw;
   }
-  .reservation-item{
+
+  .reservation-item {
     width: 75vw;
   }
-  .reservation-item-inline{
+
+  .reservation-item-inline {
     width: 75vw;
   }
- 
+
 
 
 
