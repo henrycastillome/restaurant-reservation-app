@@ -76,7 +76,7 @@ const Main = () => {
 
   return (
     <main>
-      <Slide cascade duration={2000}>
+      <Slide cascade >
       <div className="stack-horizontal" style={{ width: "100%", gap: "2rem" }}>
         <h1
           id="specials-section"
@@ -90,7 +90,7 @@ const Main = () => {
         </div>
       </div>
       </Slide >
-      <Slide direction={'right'} cascade duration={3000}>
+      <Slide direction={'right'} >
       <div className="stack-horizontal" style={{ padding: "2rem" }}>
         {plates.map((plate) => (
           
@@ -107,10 +107,10 @@ const Main = () => {
       </Slide>
       
       <div className="testimonials">
-      <Slide cascade duration={2000}>
+      <Slide >
         <h1 id="reviews-section">Testimonials</h1>
         </Slide>
-        <Slide direction={'right'} cascade duration={3000}>
+        <Slide direction={'right'} >
         <div
           className="stack-horizontal"
           style={{

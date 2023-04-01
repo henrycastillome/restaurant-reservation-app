@@ -231,7 +231,7 @@ const Reservations = () => {
     <div className="reservation">
       
         <div className="reservation-card">
-          <Slide duration={3000} cascade triggerOnce>
+          <Slide  cascade triggerOnce>
             <h1
               id="reservations-section"
               style={{ color: "var(--primary-color-green" }}
@@ -241,7 +241,7 @@ const Reservations = () => {
           </Slide>
 
           <form onSubmit={handleSubmit}>
-            <Slide duration={2000} cascade triggerOnce>
+            <Slide  cascade triggerOnce>
               <div className="reservation-item">
                 <InputField
                   label="First Name"
@@ -264,7 +264,7 @@ const Reservations = () => {
                 ) : null}
               </div>
             </Slide> 
-            <Slide duration={2000} cascade triggerOnce>
+            <Slide  cascade triggerOnce>
               <div className="reservation-item">
                 <InputField
                   
@@ -290,7 +290,7 @@ const Reservations = () => {
                 ) : null}
               </div>
             </Slide>
-            <Slide duration={2000} cascade triggerOnce>
+            <Slide  cascade triggerOnce>
               <div className="reservation-item">
                 <InputField
                   label="Email"
@@ -310,7 +310,7 @@ const Reservations = () => {
                 ) : null}
               </div>
             </Slide>
-            <Slide duration={2000} cascade triggerOnce>
+            <Slide  cascade triggerOnce>
               <div className="reservation-item" >
                 <InputFieldPhone
                  
@@ -329,7 +329,7 @@ const Reservations = () => {
                 ) : null}
               </div>
             </Slide>
-            <Slide duration={2000} cascade triggerOnce>
+            <Slide  cascade triggerOnce>
               <div className="reservation-item-inline">
                 <div style={{ display: "block", width: "100%" }}>
                   <InputFieldDate
@@ -376,7 +376,7 @@ const Reservations = () => {
               </div>
             </Slide>
 
-            <Slide duration={2000} cascade triggerOnce>
+            <Slide  cascade triggerOnce>
               <div className="reservation-item">
                 <InputFieldGuest
                   value={guest.value}
@@ -392,7 +392,7 @@ const Reservations = () => {
                 ) : null}
               </div>
             </Slide>
-            <Slide duration={2000} cascade triggerOnce>
+            <Slide cascade triggerOnce>
               <div className="reservation-item">
                 <InputFieldSeat
                   value={seat.value}
@@ -406,7 +406,7 @@ const Reservations = () => {
                 ) : null}
               </div>
             </Slide>
-            <Slide duration={2000} cascade triggerOnce>
+            <Slide cascade triggerOnce>
               <div className="reservation-item">
                 <InputFieldOcasion
                   value={ocasion.value}
@@ -422,7 +422,7 @@ const Reservations = () => {
                 ) : null}
               </div>
             </Slide>
-            <Slide duration={2000} cascade triggerOnce>
+            <Slide  cascade triggerOnce>
               <div className="reservation-item">
                 <InputFieldText
                   type="text"
@@ -433,7 +433,7 @@ const Reservations = () => {
                 />
               </div>
             </Slide>
-            <Slide duration={2000} cascade triggerOnce>
+            <Slide cascade triggerOnce>
               <div className="reservation-item">
                 <Button type="submit" disabled={isFormValid}>
                   {isFormValid ? "Submitting" : "Submit"}

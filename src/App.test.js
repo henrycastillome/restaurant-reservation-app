@@ -1,13 +1,7 @@
 import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
 import Reservations from "./components/Reservations";
-import InputFieldPhone from "./inputs/InputFieldPhone";
-import InputFieldDate from "./inputs/InputFieldDate";
-import InputFieldTime from "./inputs/InputFieldTime";
-import InputFieldGuest from "./inputs/InputFieldGuest";
-import InputFieldSeat from "./inputs/InputFieldSeat";
-import InputFieldOcasion from "./inputs/InputFieldOcasion";
-import InputField from "./inputs/InputField";
+
 
 describe("Reservations", () => {
   test("Testing if the values are being submittted", ()=>{
@@ -21,6 +15,7 @@ describe("Reservations", () => {
   const seat = "Indoor";
   const ocasion = "Birthday";
   const handleSubmit = jest.fn();
+
   if (!window.IntersectionObserver) return
 
   // Render the component

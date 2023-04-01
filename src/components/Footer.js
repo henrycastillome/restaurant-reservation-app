@@ -52,7 +52,7 @@ const Footer = () => {
         ))}
       </div>
       <div className="stack-horizontal" style={{ padding: "0 0" }}>
-      <Slide direction="left" cascade duraction={2000}>
+      <Slide direction="left" cascade >
         <div className="stack-vertical">
           <h6> Navigation</h6>
 
@@ -62,7 +62,7 @@ const Footer = () => {
           {<button onClick={handleClick("reservations")}>Reservations</button>}
         </div>
         </Slide>
-      <Slide direction="down" cascade duraction={3000}>
+      <Slide direction="down" cascade >
         <div className="stack-vertical">
           <h6> Contact</h6>
 
@@ -75,7 +75,7 @@ const Footer = () => {
           <a href={`mailto:${email}`}>Contact us</a>
         </div>
         </Slide>
-        <Slide direction="right" cascade duraction={4000}>
+        <Slide direction="right" cascade >
 
         <div className="stack-vertical">
           <h6> Social Media</h6>
