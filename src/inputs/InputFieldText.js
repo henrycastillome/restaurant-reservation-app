@@ -45,7 +45,7 @@ const InputFieldText = ({
 }) => {
   return (
     <InputWrapper>
-      <label>{label}</label>
+      <label htmlFor={htmlFor}>{label}</label>
       <textarea
         type={type}
         value={value}
@@ -54,6 +54,7 @@ const InputFieldText = ({
         htmlFor={htmlFor}
         rows="4"
         cols="50"
+        
       />
     </InputWrapper>
   );

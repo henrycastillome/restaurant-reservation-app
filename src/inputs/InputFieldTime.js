@@ -69,8 +69,8 @@ padding-top: 0.5rem ;
 const InputFieldTime = ({ onChange, value, isinvalid, onBlur, hasValue, availableTimes }) => {
   return (
     <InputWrapperTime isinvalid={isinvalid} hasValue={hasValue}>
-      <label>Time <sup>*</sup></label>
-      <select data-testid="time-component"  name="day-time" value={value}  onChange={onChange} onBlur={onBlur}>
+      <label htmlFor="time-select">Time <sup>*</sup></label>
+      <select data-testid="time-component" id='time-select'  name="day-time" value={value}  onChange={onChange} onBlur={onBlur}>
         <option value="" disabled >
           Select..
         </option>
