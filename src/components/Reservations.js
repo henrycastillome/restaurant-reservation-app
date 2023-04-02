@@ -11,6 +11,8 @@ import InputFieldOcasion from "../inputs/InputFieldOcasion";
 import ErrorMessage from "../inputs/ErrorMessage";
 import { useAlertContext } from "../context/alertContext";
 import { Slide } from "react-awesome-reveal";
+import { fetchAPI } from "../API/Api";
+
 
 const isEmail = (email) => {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -57,6 +59,7 @@ const Reservations = () => {
   });
   const [isInvalidEmail, setIsInvalidEmail] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
+  const [availableTimes, setAvailableTimes] = useState([]);
 
   const handlePhoneNumberChange = (e) => {
     const input = e.target.value.replace(/\D/g, "");
@@ -94,6 +97,9 @@ const Reservations = () => {
   maxDate.setDate(maxDate.getDate() + 14);
 
   const minDate = new Date();
+  minDate.setHours(0, 0, 0, 0); // set the time part to midnight
+
+  
 
   const formValidation = () => {
     let isValid = true;
@@ -190,6 +196,28 @@ const Reservations = () => {
 
   const { alertSucess } = useAlertContext();
 
+  
+
+  
+
+  const handleDate=(e)=>{
+    
+    const inputDate=e.target.value
+    const dateRequested= new Date(inputDate)
+    const dateFetch=fetchAPI(dateRequested)
+    setDate({
+      value:inputDate,
+      isTouched:true
+    })
+    setAvailableTimes(dateFetch)
+   
+
+  }
+
+ 
+
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -213,6 +241,8 @@ const Reservations = () => {
         .map(([key, value]) => `${key}: ${value}`)
         .join("\n");
 
+      
+
       alert(`Form submitted with the following values:\n\n${formValues}`);
 
       alertSucess({ name: name.value, lastName: lastName.value });
@@ -221,7 +251,9 @@ const Reservations = () => {
     }
   };
   return (
+
     <div className="reservation">
+      
       <div className="reservation-card">
         <Slide cascade triggerOnce>
           <h1
@@ -324,7 +356,7 @@ const Reservations = () => {
               <div style={{ display: "block", width: "100%" }}>
                 <InputFieldDate
                   value={date.value}
-                  onChange={(e) => setDate({ ...date, value: e.target.value })}
+                  onChange={handleDate}
                   onBlur={(e) => setDate({ ...date, isTouched: true })}
                   isinvalid={
                     (date.isTouched && date.value === "") ||
@@ -348,6 +380,7 @@ const Reservations = () => {
               <div style={{ display: "block", width: "100%" }}>
                 <InputFieldTime
                   value={timeOfDay.value}
+                  availableTimes={availableTimes}
                   hasValue={timeOfDay.value} //to add a place holder color gray to the select button in the component (check component)
                   onChange={(e) =>
                     setTimeofDay({ ...timeOfDay, value: e.target.value })
@@ -355,11 +388,12 @@ const Reservations = () => {
                   onBlur={(e) =>
                     setTimeofDay({ ...timeOfDay, isTouched: true })
                   }
-                  isinvalid={timeOfDay.isTouched && timeOfDay.value === ""}
+                  isinvalid={(timeOfDay.isTouched && timeOfDay.value === "") || (date.value!=="" && timeOfDay.value==="")}
                 />
-                {timeOfDay.isTouched && timeOfDay.value === "" ? (
-                  <ErrorMessage>Required</ErrorMessage>
-                ) : null}
+                {timeOfDay.isTouched && timeOfDay.value === ""  && date.value==="" ? (
+                  <ErrorMessage>Select a date first</ErrorMessage>
+                ) :
+                  <ErrorMessage>{timeOfDay.isTouched && timeOfDay.value === "" ? "Required" : null}</ErrorMessage> }
               </div>
             </div>
           </Slide>
